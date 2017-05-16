@@ -1,0 +1,170 @@
+body{
+	font-size: 18px;
+	font-family: sans-serif;
+	margin: 10px;
+	padding: 10px;
+}
+
+#logout {
+	display: block;
+	margin: 10px;
+	padding: 10px;
+	border: 1px solid black;
+}
+
+a {
+	display: inline-block;
+	text-decoration: none;
+	font-weight: bold;
+	color: #229;
+   background: #EEE !important;
+	 font-size: 16px;
+   padding: 10px 30px !important;
+   /*border is optional*/
+   border: 1px solid #444; 
+	 border-radius: 15px;
+	 box-shadow: inset 0 -5px 2px 2px #DDD, inset 0 5px 2px 2px white;
+}
+
+a:hover{
+	color: #66D;
+}
+
+.textarea {
+	width: 700px;
+	height: auto;
+	display: block;
+	margin: 10px;
+	padding: 10px;
+	border: 1px dashed black;
+	min-height: 1.5em;
+	font-size: 14px;
+	background-color: #FAFAFA;
+}
+
+textarea {
+	width: 700px;
+	height: 100px;
+	display: block;
+	margin: 10px;
+	padding: 10px;
+	border: 1px solid black;
+	font-size: 14px;
+	background-color: #FAFAFA;
+}
+
+label {
+	display: block;
+	margin: 20px 10px 0px;
+}
+
+input { 
+	display: block;
+	margin: 10px;
+}
+
+select { 
+	display: block;
+	margin: 10px;
+}
+
+#add-issue{
+	display: block;
+	margin: 10px;
+	padding: 10px;
+	border: 1px solid black;
+}
+
+#loginform {
+	display: block;
+	margin: 10px;
+	padding: 10px;
+	border: 1px solid black;
+	width: 300px;
+}
+
+ul {
+	display: block;
+	margin: 10px;
+	padding: 10px;
+	height: 38px;
+	border: 1px solid black;
+}
+
+ul li {
+	float: left;
+}
+
+#issue-list{
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	position: relative;
+}
+
+table {
+	margin: 10px;
+	padding: 10px;
+	height: 1em;
+	border: 1px solid black;
+	font-size: 14px; 
+	width: auto;
+}
+
+table tr th{
+	font-weight: bold;
+	margin: 0;
+	padding: 10px;
+	border: 1px solid black;
+}
+
+table tr td{
+	margin: 0;
+	padding: 10px;
+	border: 1px solid black;
+	text-align: center;
+	min-width: 80px;
+}
+
+.info{
+	display: inline-block;
+	border: 1px solid black;
+	padding: 0px 10px;
+	margin: 0px;
+	font-size: 12px;
+	height: 18px;
+	line-height: 18px;
+}
+
+.by {
+	background-color: #FEE;
+}
+
+.assigned-to{
+	background-color: #EFE;
+}
+
+.edit-time{
+	background-color: #EEF;
+}
+
+.mark {
+	font-weight: bold;
+}
+
+.msg{
+	display: block;
+	margin: 10px 0px;
+	padding: 0px 0px 10px;
+}
+
+.button{
+   background: #EEE !important;
+	 font-size: 16px;
+   padding: 10px 30px !important;
+   /*border is optional*/
+   border: 1px solid #444; 
+	 border-radius: 15px;
+	 box-shadow: inset 0 -5px 2px 2px #DDD, inset 0 5px 2px 2px white;
+}
+
