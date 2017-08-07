@@ -4,6 +4,7 @@
 		header( "Location: index.php" );
 	}
 ?>
+<div id="issue-list-box">
 <div id="issue-list">
 	<table>
 		<tr>
@@ -29,15 +30,15 @@
 				Options
 			</th>
 		</tr>
-<?php		
+<?php
 
 	require_once('issue.php');
 	$d = dir(getcwd() ."/issues");
 	$files = array();
-	while (($file = $d->read()) !== false){ 
+	while (($file = $d->read()) !== false){
 		array_push( $files, $file );
 	}
-	$d->close(); 
+	$d->close();
 	sort($files);
 
 	foreach($files as $f) {
@@ -45,19 +46,23 @@
 		if($f==="..") continue;
 		$issuenumber = getcwd() ."/issues/".$f;
 		if( !is_dir( $issuenumber) ) continue;
-		if( !file_exists($issuenumber."/issue-steps.php")) continue;
-		if( !file_exists($issuenumber."/issue-expected.php")) continue;
-		if( !file_exists($issuenumber."/issue-saw.php")) continue;
-		if( !file_exists($issuenumber."/issue-creator.php")) continue;
+		if( !file_exists($issuenumber."/issue-steps.md")) continue;
+		if( !file_exists($issuenumber."/issue-expected.md")) continue;
+		if( !file_exists($issuenumber."/issue-saw.md")) continue;
+		if( !file_exists($issuenumber."/issue-creator")) continue;
 		
 		$issue = new Issue($f);
+
+		if( isset( $_GET['filter'] ) ) {
+			if ( $_GET['filter'] !== $issue->assigned ) continue;
+		}
 ?>
 	<tr>
 		<td>
 			<?php echo $issue->number ?>
 		</td>
 		<td>
-			<?php echo $issue->saw ?>
+			<?php echo $issue->sawShort ?>
 		</td>
 		<td>
 			<?php echo $issue->creator ?>
@@ -75,8 +80,9 @@
 			<a href="edit.php?issue=<?php echo $issue->number; ?>">edit</a>
 		</td>
 	</tr>
-<?php	
+<?php
 	}
 ?>
 </table>
+</div>
 </div>

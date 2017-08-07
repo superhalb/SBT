@@ -13,10 +13,12 @@
 	require_once('issue.php');
 	$issue = new Issue($_GET['issue']);
 	if ( isset($_POST['add-issue-comment']) && isset($_POST['add-issue-assign'] ) ) {
-		$msg = $_POST['add-issue-comment'];
-		$assign = $_POST['add-issue-assign'];
 		$now = time();
-		file_put_contents( $issue->dir . "/" .  $now . "." . User::$name . "." . $assign . ".php", "<?php exit; ?>" . $msg );
+		$issueNumber = $issue->number;
+		include( "attach.php" );
+		$msg = $_POST['add-issue-comment'];
+		$issue->assigned = $_POST['add-issue-assign'];
+		file_put_contents( $issue->dir . "/" .  $now . "." . User::$name . "." . $issue->assigned ,  $msg );
 	}
 	$issue->readEdits();
 ?>
@@ -27,12 +29,13 @@
 	</head>
 	<body>
 		<ul>
+			<li class="issue-title">Issue # <?php echo $issue->number; ?></li>
 			<li>
 				<a href="index.php">Back</a>
 			</li>
 		</ul>
 
-		<form id="form" action="edit.php?issue=<?php echo $_GET['issue'];?>" method="post">
+		<form id="form" action="edit.php?issue=<?php echo $_GET['issue'];?>" method="post" enctype="multipart/form-data">
 			<label>Steps to reproduce:</label>
 			<div id="add-issue-steps" class="textarea"><?php echo $issue->steps; ?></div>
 			<label>What you expected to see:</label>
@@ -49,6 +52,19 @@
 				<div class="msg">
 					<?php echo $edit->msg; ?>
 				</div>
+<?php
+		if ( count( $edit->attachs ) > 0 ) {
+			echo "<div class='attachs'>attached files:<br>";
+			foreach( $edit->attachs as $fileid => $attach ) {
+?>
+					<a href="<?php echo 'getattach.php?id=' . $fileid; ?>" class="attached">
+						<?php echo $attach; ?>
+					</a>
+<?php
+			}
+			echo "</div>";
+		}
+?>
 				<div class="by info">By <span class="mark"><?php echo $edit->who; ?></span></div>
 				<div class="assigned-to info">Assigned to <span class="mark"><?php echo $edit->assign; ?></span></div>
 				<div class="edit-time info">At <span class="mark"><?php echo $edit->timeStr; ?></span></div>
@@ -59,16 +75,20 @@
 			<br><br>
 			<label>New comment:</label>
 			<textarea name="add-issue-comment" ></textarea>
+			<div id="attachs">
+				<script type="text/javascript" src="attach.js"></script>
+				<label class="attachbutton">attach file<input type="file" name="attach[]" onchange="javascript:addFile(this)" /></label>
+			</div>
 			<label>Assign to:</label>
 			<select name="add-issue-assign">
 <?php
 	foreach( User::$credentials as $user=>$pass) {
-		echo '<option value="'. $user .'">'. $user .'</option>';
+		echo '<option value="'. $user .'"'. ($issue->assigned == $user ? " selected" : "") .'>'. $user .'</option>';
 	}
 ?>
 			</select>
 			<br><br>
-			<button onclick="form.submit()" class="button">Save</button>
+			<button onclick="form.submit()" class="button">save</button>
 		</form>
 	</body>
 </html>
