@@ -1,7 +1,6 @@
 <?php
-
 	date_default_timezone_set("UTC");
-	require_once('user.php');
+	require_once('User.php');
 	require_once('login.php');
 ?>
 <html>

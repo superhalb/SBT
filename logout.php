@@ -1,5 +1,4 @@
 <?php
 	session_start();
-	require_once('user.php');
+	require_once('User.php');
 	User::logout();
-?>

@@ -1,7 +1,8 @@
 <?php
-	date_default_timezone_set("UTC");
-	require_once('user.php');
+	require_once('User.php');
+	require_once('Issue.php');
 	require_once('login.php');
+
 	if ( !User::isLogged() ) {
 		header( "Location: index.php" );
 		exit;
@@ -10,15 +11,12 @@
 		header( "Location: index.php" );
 		exit;
 	}
-	require_once('issue.php');
-	$issue = new Issue($_GET['issue']);
-	if ( isset($_POST['add-issue-comment']) && isset($_POST['add-issue-assign'] ) ) {
-		$now = time();
+	$issue = new Issue( $_GET['issue'] );
+	if ( isset($_POST['add-issue-comment']) && isset($_POST['add-issue-assigned'] ) ) {
 		$issueNumber = $issue->number;
-		include( "attach.php" );
 		$msg = $_POST['add-issue-comment'];
-		$issue->assigned = $_POST['add-issue-assign'];
-		file_put_contents( $issue->dir . "/" .  $now . "." . User::$name . "." . $issue->assigned ,  $msg );
+		$assigned = $_POST['add-issue-assigned'];
+		$issue->update( $assigned , $msg );
 	}
 	$issue->readEdits();
 ?>
@@ -45,6 +43,7 @@
 			<label>Assigned to:</label>
 			<div id="add-issue-assigned-to" class="textarea"><?php echo $issue->assigned; ?></div>
 			<br><br>
+			<label>History:</label>
 <?php
 	foreach( $issue->edits as $edit ) {
 ?>
@@ -66,7 +65,7 @@
 		}
 ?>
 				<div class="by info">By <span class="mark"><?php echo $edit->who; ?></span></div>
-				<div class="assigned-to info">Assigned to <span class="mark"><?php echo $edit->assign; ?></span></div>
+				<div class="assigned-to info">Assigned to <span class="mark"><?php echo $edit->assigned; ?></span></div>
 				<div class="edit-time info">At <span class="mark"><?php echo $edit->timeStr; ?></span></div>
 			</div>
 <?php
@@ -80,7 +79,7 @@
 				<label class="attachbutton">attach file<input type="file" name="attach[]" onchange="javascript:addFile(this)" /></label>
 			</div>
 			<label>Assign to:</label>
-			<select name="add-issue-assign">
+			<select name="add-issue-assigned">
 <?php
 	foreach( User::$credentials as $user=>$pass) {
 		echo '<option value="'. $user .'"'. ($issue->assigned == $user ? " selected" : "") .'>'. $user .'</option>';

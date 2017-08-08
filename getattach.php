@@ -1,5 +1,7 @@
 <?php
-	require_once('user.php');
+	require_once('User.php');
+	require_once('Issue.php');
+
 	if ( !User::isLogged() ) {
 		header( "Location: index.php" );
 	}
@@ -7,7 +9,6 @@
 		header( "Location: index.php" );
 		exit;
 	}
-	require_once('issue.php');
 	$fileid = $_GET['id'];
 	$filename = explode(".",$fileid);
 	unset($filename[0]);
@@ -16,4 +17,3 @@
 	$filename = implode(".",$filename);
 	header( 'Content-disposition: attachment; filename=' . $filename );
 	readfile( Issue::attachsPath . $fileid );
-?>

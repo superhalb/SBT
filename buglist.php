@@ -1,5 +1,6 @@
 <?php
-	require_once('user.php');
+	require_once('User.php');
+	require_once('Issue.php');
 	if ( !User::isLogged() ) {
 		header( "Location: index.php" );
 	}
@@ -32,7 +33,6 @@
 		</tr>
 <?php
 
-	require_once('issue.php');
 	$d = dir(getcwd() ."/issues");
 	$files = array();
 	while (($file = $d->read()) !== false){
@@ -49,9 +49,8 @@
 		if( !file_exists($issuenumber."/issue-steps.md")) continue;
 		if( !file_exists($issuenumber."/issue-expected.md")) continue;
 		if( !file_exists($issuenumber."/issue-saw.md")) continue;
-		if( !file_exists($issuenumber."/issue-creator")) continue;
-		
-		$issue = new Issue($f);
+
+		$issue = new Issue( $f );
 
 		if( isset( $_GET['filter'] ) ) {
 			if ( $_GET['filter'] !== $issue->assigned ) continue;
@@ -62,16 +61,16 @@
 			<?php echo $issue->number ?>
 		</td>
 		<td>
-			<?php echo $issue->sawShort ?>
+			<?php echo $issue->sawShort() ?>
 		</td>
 		<td>
 			<?php echo $issue->creator ?>
 		</td>
 		<td>
-			<?php echo $issue->creationStr ?>
+			<?php echo $issue->creationToString() ?>
 		</td>
 		<td>
-			<?php echo $issue->modificationStr ?>
+			<?php echo $issue->modificationToString() ?>
 		</td>
 		<td>
 			<?php echo $issue->assigned ?>
