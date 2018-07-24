@@ -13,7 +13,7 @@
 				$this->steps = $descriptions->steps;
 				$this->expected = $descriptions->expected;
 				$this->saw = $descriptions->saw;
-				mkdir( $this->dir );
+				mkdir( $this->dir , 0775);
 				file_put_contents( $this->dir . "/issue-steps.md", $this->steps );
 				file_put_contents( $this->dir . "/issue-expected.md", $this->expected );
 				file_put_contents( $this->dir . "/issue-saw.md", $this->saw);

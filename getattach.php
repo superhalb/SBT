@@ -16,4 +16,4 @@
 	unset($filename[2]);
 	$filename = implode(".",$filename);
 	header( 'Content-disposition: attachment; filename=' . $filename );
-	readfile( Issue::attachsPath . $fileid );
+	readfile( Issue::ATTACHS_PATH . $fileid );
