@@ -34,12 +34,12 @@
 		</ul>
 
 		<form id="form" action="edit.php?issue=<?php echo $_GET['issue'];?>" method="post" enctype="multipart/form-data">
-			<label>Steps to reproduce:</label>
-			<div id="add-issue-steps" class="textarea"><?php echo $issue->steps; ?></div>
+			<label>What you saw:</label>
+			<div id="add-issue-saw" class="textarea"><?php echo $issue->saw; ?></div>
 			<label>What you expected to see:</label>
 			<div id="add-issue-expected" class="textarea"><?php echo $issue->expected; ?></div>
-			<label>What you saw instead:</label>
-			<div id="add-issue-saw" class="textarea"><?php echo $issue->saw; ?></div>
+			<label>Steps to reproduce:</label>
+			<div id="add-issue-steps" class="textarea"><?php echo $issue->steps; ?></div>
 			<label>Assigned to:</label>
 			<div id="add-issue-assigned-to" class="textarea"><?php echo $issue->assigned; ?></div>
 			<br><br>

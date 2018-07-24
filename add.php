@@ -29,12 +29,12 @@
 			</li>
 		</ul>
 		<form id="add-issue" action="add.php" method="post" enctype="multipart/form-data">
-			<label>Steps to reproduce:</label>
-			<textarea name="add-issue-steps" ></textarea>
+			<label>What you saw:</label>
+			<textarea name="add-issue-saw" ></textarea>
 			<label>What you expected to see:</label>
 			<textarea name="add-issue-expected" ></textarea>
-			<label>What you saw instead:</label>
-			<textarea name="add-issue-saw" ></textarea>
+			<label>Steps to reproduce:</label>
+			<textarea name="add-issue-steps" ></textarea>
 			<div id="attachs">
 				<script type="text/javascript" src="attach.js"></script>
 				<label class="attachbutton">attach file<input type="file" name="attach[]" onchange="javascript:addFile(this)" /></label>
