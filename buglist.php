@@ -46,9 +46,7 @@
 		if($f==="..") continue;
 		$issuenumber = getcwd() ."/issues/".$f;
 		if( !is_dir( $issuenumber) ) continue;
-		if( !file_exists($issuenumber."/issue-steps.md")) continue;
-		if( !file_exists($issuenumber."/issue-expected.md")) continue;
-		if( !file_exists($issuenumber."/issue-saw.md")) continue;
+		if( !file_exists($issuenumber."/issue-description.md")) continue;
 
 		$issue = new Issue( $f );
 
@@ -61,7 +59,7 @@
 			<?php echo $issue->number ?>
 		</td>
 		<td>
-			<?php echo $issue->sawShort() ?>
+			<?php echo $issue->description ?>
 		</td>
 		<td>
 			<?php echo $issue->creator ?>

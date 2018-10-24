@@ -51,7 +51,7 @@
 		}
 
 		public function sawShort() {
-			return strlen( $this->saw ) > 255 ? substr( $this->saw , 0 , 255 ) . " ..." : $this->saw;
+			return strlen( $this->description ) > 255 ? substr( $this->description , 0 , 255 ) . " ..." : $this->description;
 		}
 
 		public function getEditFilesList() {
