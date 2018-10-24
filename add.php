@@ -4,11 +4,9 @@
 	if ( !User::isLogged() ) {
 		header( "Location: index.php" );
 	}
-	if ( isset($_POST['add-issue-steps']) && isset($_POST['add-issue-expected'])  && isset($_POST['add-issue-saw']) ) {
+	if ( isset($_POST['add-issue-description']) ) {
 		$issueValues = new \stdClass();
-		$issueValues->steps = $_POST['add-issue-steps'];
-		$issueValues->expected = $_POST['add-issue-expected'];
-		$issueValues->saw = $_POST['add-issue-saw'];
+		$issueValues->description = $_POST['add-issue-description'];
 		$issueValues->assigned = $_POST['add-issue-assigned'];
 		$issue = new Issue( uniqid() , $issueValues );
 		header( "Location: edit.php?issue=" . $issue->number );
@@ -29,12 +27,17 @@
 			</li>
 		</ul>
 		<form id="add-issue" action="add.php" method="post" enctype="multipart/form-data">
-			<label>What you saw:</label>
-			<textarea name="add-issue-saw" ></textarea>
-			<label>What you expected to see:</label>
-			<textarea name="add-issue-expected" ></textarea>
-			<label>Steps to reproduce:</label>
-			<textarea name="add-issue-steps" ></textarea>
+			<textarea name="add-issue-description" >
+What you saw:
+
+
+What you expected to see:
+
+
+Steps to reproduce:
+
+
+</textarea>
 			<div id="attachs">
 				<script type="text/javascript" src="attach.js"></script>
 				<label class="attachbutton">attach file<input type="file" name="attach[]" onchange="javascript:addFile(this)" /></label>
